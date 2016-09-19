@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>router sample</title>
+        <link rel="import" href="/bower_components/polymer/polymer.html">
+        <link rel="import" href="/bower_components/app-route/app-route.html">
+        <link rel="import" href="/bower_components/app-route/app-location.html">
+        <link rel="import" href="/bower_components/paper-input/paper-input.html">
+    </head>
+    <body>
+        <h1>router demo</h1>
+        <hr />
+        <router-demo></router-demo>
+
+        <!-- router-demo -->
+        <dom-module id="router-demo">
+            <template>
+                <app-location route="{{route}}"></app-location>
+                <app-route route="{{route}}" pattern="{{pattern}}" data="{{data}}" active="{{active}}"></app-route>
+
+                <div>active: {{active}}</div>
+                <div hidden$="{{active}}">pattern一致してません</div>
+                <div hidden$="{{!active}}">pattern一致してます</div>
+                <!-- <div>Route is <span hidden$="{{active}}">not</span> active.</div> -->
+                <paper-input label="Route path" value="{{route.path}}"></paper-input>
+                <paper-input label="Match pattern" value="{{pattern}}"></paper-input>
+            </template>
+            <script>
+                Polymer({
+                    is: 'router-demo',
+                    properties: {
+                        pattern: {
+                            value: function() {
+                                return this._pathname();
+                            }
+                        },
+                    },
+                    _pathname: function() {
+                        let pathname = window.location.pathname;
+                        return pathname.substring(0, pathname.lastIndexOf('/'));
+                    }
+                });
+            </script>
+        </dom-module>
+
+    </body>
+</html>

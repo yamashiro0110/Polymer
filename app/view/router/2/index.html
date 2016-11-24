@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>router</title>
+  <link rel="import" href="/bower_components/polymer/polymer.html">
+  <link rel="import" href="/bower_components/app-route/app-route.html">
+  <link rel="import" href="/bower_components/app-route/app-location.html">
+  <link rel="import" href="/bower_components/paper-input/paper-input.html">
+  <link rel="import" href="/bower_components/iron-pages/iron-pages.html">
+</head>
+
+<body>
+
+  <dom-module id="demo-links">
+    <template>
+      <app-location route="{{route}}"></app-location>
+
+      <app-route
+        route="{{route}}"
+        pattern="/view/router/2/:name"
+        data="{{routeData}}"
+        tail="{{subRoute}}"></app-route>
+
+
+      <h1>router demo</h1>
+      <hr />
+        <ul>
+          <li>
+            <a href="hoge">hoge</a>
+          </li>
+          <li>
+            <a href="fuga">fuga</a>
+          </li>
+          <li>
+            <a href="piyo">piyo</a>
+          </li>
+        </ul>
+
+        <iron-pages selected="{{routeData.name}}" attr-for-selected="name">
+          <div name="hoge">hogeが選択されました</div>
+          <div name="fuga">fugaが選択されました</div>
+          <div name="piyo">piyoが選択されました</div>
+        </iron-pages>
+
+      </template>
+
+    <script>
+      Polymer({
+        is: 'demo-links',
+      });
+    </script>
+  </dom-module>
+
+  <demo-links></demo-links>
+
+</body>
+</html>
